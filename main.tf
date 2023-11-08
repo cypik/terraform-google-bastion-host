@@ -1,5 +1,5 @@
 module "labels" {
-  source      = "git::git@github.com:opz0/terraform-gcp-labels.git?ref=master"
+  source      = "git::https://github.com/opz0/terraform-gcp-labels.git?ref=v1.0.0"
   name        = var.name
   environment = var.environment
   label_order = var.label_order
@@ -9,7 +9,6 @@ module "labels" {
 
 data "google_client_config" "current" {
 }
-
 resource "random_id" "random_role_id_suffix" {
   byte_length = 2
 }
@@ -39,11 +38,10 @@ resource "google_service_account" "bastion_host" {
 ###### instance_template module call.
 ######==============================================================================
 module "instance_template" {
-  source               = "git::git@github.com:opz0/terraform-gcp-template-instance.git?ref=master"
+  source               = "git::https://github.com/opz0/terraform-gcp-template-instance.git?ref=v1.0.0"
   instance_template    = true
   name                 = format("%s", module.labels.id)
   region               = var.region
-  project_id           = data.google_client_config.current.project
   source_image_family  = var.image_family
   source_image_project = var.image_project
   subnetwork           = var.subnet

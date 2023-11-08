@@ -10,7 +10,4 @@ terraform {
       version = "~> 3.0"
     }
   }
-  provider_meta "google" {
-    module_name = "blueprints/terraform/terraform-google-bastion-host/v5.3.0"
-  }
 }
