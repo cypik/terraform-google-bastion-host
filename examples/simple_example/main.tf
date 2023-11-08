@@ -1,39 +1,37 @@
 provider "google" {
-  project = "opz0-xxxxxx"
+  project = "opz0-397319"
   region  = "us-west1"
   zone    = "us-west1-a"
 }
 
-######==============================================================================
-###### vpc module call.
-######==============================================================================
+####==============================================================================
+#### vpc module call.
+####==============================================================================
 module "vpc" {
-  source                                    = "git::git@github.com:opz0/terraform-gcp-vpc.git?ref=master"
+  source                                    = "git::https://github.com/opz0/terraform-gcp-vpc.git?ref=v1.0.0"
   name                                      = "app"
   environment                               = "test"
-  label_order                               = ["name", "environment"]
   network_firewall_policy_enforcement_order = "AFTER_CLASSIC_FIREWALL"
 }
 
-######==============================================================================
-###### subnet module call.
-######==============================================================================
+####==============================================================================
+#### subnet module call.
+####==============================================================================
 module "subnet" {
-  source                   = "git::git@github.com:opz0/terraform-gcp-subnet.git?ref=master"
-  name                     = "subnet"
-  environment              = "test"
-  gcp_region               = "us-west1"
-  network                  = module.vpc.vpc_id
-  source_ranges            = ["10.10.0.0/16"]
-  private_ip_google_access = true
+  source        = "git::https://github.com/opz0/terraform-gcp-subnet.git?ref=v1.0.0"
+  name          = "app"
+  environment   = "test"
+  gcp_region    = "us-west1"
+  network       = module.vpc.vpc_id
+  ip_cidr_range = "10.10.0.0/16"
 }
 
 ####==============================================================================
 #### firewall module call.
 ####==============================================================================
 module "firewall" {
-  source        = "git::git@github.com:opz0/terraform-gcp-firewall.git?ref=master"
-  name          = "app11"
+  source        = "git::https://github.com/opz0/terraform-gcp-firewall.git?ref=v1.0.0"
+  name          = "app"
   environment   = "test"
   network       = module.vpc.self_link
   source_ranges = ["0.0.0.0/0"]
@@ -44,7 +42,6 @@ module "firewall" {
     }
   ]
 }
-
 ######==============================================================================
 ###### iap_bastion module call.
 ######==============================================================================

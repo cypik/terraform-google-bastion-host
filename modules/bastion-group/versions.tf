@@ -13,7 +13,4 @@ terraform {
       source = "hashicorp/random"
     }
   }
-  provider_meta "google" {
-    module_name = "blueprints/terraform/terraform-google-bastion-host:bastion-group/v5.3.0"
-  }
 }

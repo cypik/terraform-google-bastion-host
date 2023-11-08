@@ -1,51 +1,49 @@
 provider "google" {
-  project = "opz0-xxxxxx"
+  project = "opz0-397319"
   region  = "us-west1"
   zone    = "us-west1-a"
 }
 
-######==============================================================================
-###### vpc module call.
-######==============================================================================
+####==============================================================================
+#### vpc module call.
+####==============================================================================
 module "vpc" {
-  source                                    = "git::git@github.com:opz0/terraform-gcp-vpc.git?ref=master"
+  source                                    = "git::https://github.com/opz0/terraform-gcp-vpc.git?ref=v1.0.0"
   name                                      = "app"
   environment                               = "test"
-  label_order                               = ["name", "environment"]
   network_firewall_policy_enforcement_order = "AFTER_CLASSIC_FIREWALL"
 }
 
-######==============================================================================
-###### subnet module call.
-######==============================================================================
+####==============================================================================
+#### subnet module call.
+####==============================================================================
 module "subnet" {
-  source        = "git::git@github.com:opz0/terraform-gcp-subnet.git?ref=master"
-  name          = "subnet"
+  source        = "git::https://github.com/opz0/terraform-gcp-subnet.git?ref=v1.0.0"
+  name          = "app"
   environment   = "test"
   gcp_region    = "us-west1"
   network       = module.vpc.vpc_id
-  source_ranges = ["10.10.0.0/16"]
+  ip_cidr_range = "10.10.0.0/16"
 }
 
 #####==============================================================================
 ##### service-account module call .
 #####==============================================================================
 module "service-account" {
-  source                             = "git@github.com:opz0/terraform-gcp-Service-account.git"
-  name                               = "app"
-  environment                        = "test"
-  google_service_account_key_enabled = true
-  key_algorithm                      = "KEY_ALG_RSA_2048"
-  public_key_type                    = "TYPE_X509_PEM_FILE"
-  private_key_type                   = "TYPE_GOOGLE_CREDENTIALS_FILE"
-  members                            = []
+  source           = "git::https://github.com/opz0/terraform-gcp-Service-account.git?ref=v1.0.0"
+  name             = "app"
+  environment      = "test"
+  key_algorithm    = "KEY_ALG_RSA_2048"
+  public_key_type  = "TYPE_X509_PEM_FILE"
+  private_key_type = "TYPE_GOOGLE_CREDENTIALS_FILE"
+  members          = []
 }
 
 #####==============================================================================
 ##### instance_template module call.
 #####==============================================================================
 module "instance_template" {
-  source               = "git@github.com:opz0/terraform-gcp-template-instance.git"
+  source               = "git::https://github.com/opz0/terraform-gcp-template-instance.git?ref=v1.0.0"
   instance_template    = true
   name                 = "template"
   environment          = "test"

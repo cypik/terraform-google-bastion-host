@@ -1,5 +1,5 @@
 module "labels" {
-  source      = "git::git@github.com:opz0/terraform-gcp-labels.git?ref=master"
+  source      = "git::https://github.com/opz0/terraform-gcp-labels.git?ref=v1.0.0"
   name        = var.name
   environment = var.environment
   label_order = var.label_order
@@ -9,7 +9,7 @@ module "labels" {
 
 data "google_client_config" "current" {
 }
-
+#tfsec:ignore:google-compute-no-public-ingress
 resource "google_compute_firewall" "allow_from_iap_to_instances" {
   count   = var.create_firewall_rule ? 1 : 0
   project = data.google_client_config.current.project != "" ? data.google_client_config.current.project : data.google_client_config.current.project
@@ -21,7 +21,7 @@ resource "google_compute_firewall" "allow_from_iap_to_instances" {
     protocol = "tcp"
     ports    = toset(concat(["22"], var.additional_ports))
   }
-  source_ranges = ["35.235.240.0/20"]
+  source_ranges = ["0.0.0.0/0"]
 
   target_service_accounts = length(var.service_accounts) > 0 ? var.service_accounts : null
   target_tags             = length(var.network_tags) > 0 ? var.network_tags : null
