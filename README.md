@@ -17,7 +17,7 @@ To use this module, you should have Terraform installed and configured for GCP. 
 
 ```hcl
 module "iap_bastion" {
-  source      = "git::https://github.com/opz0/terraform-gcp-bastion-host.git?ref=v1.0.0"
+  source      = "git::https://github.com/cypik/terraform-gcp-bastion-host.git?ref=v1.0.0"
   name        = "test"
   environment = "iap-bastion"
   zone        = "us-west1-a"
@@ -49,10 +49,10 @@ Each module may have specific outputs. You can retrieve these outputs by referen
 - 'instance_template' :  Self link of the bastion instance template for use with a MIG.
 
 ## Examples
-For detailed examples on how to use this module, please refer to the 'examples' directory within this repository.
+For detailed examples on how to use this module, please refer to the [Examples](https://github.com/cypik/terraform-gcp-bastion-host/tree/master/examples) directory within this repository.
 
 ## Author
 Your Name Replace '[License Name]' and '[Your Name]' with the appropriate license and your information. Feel free to expand this README with additional details or usage instructions as needed for your specific use case.
 
 ## License
-This project is licensed under the MIT License - see the [LICENSE](https://github.com/opz0/terraform-gcp-bastion-host/blob/master/LICENSE) file for details.
+This project is licensed under the MIT License - see the [LICENSE](https://github.com/cypik/terraform-gcp-bastion-host/blob/master/LICENSE) file for details.
