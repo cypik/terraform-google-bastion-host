@@ -8,7 +8,7 @@ provider "google" {
 #### vpc module call.
 ####==============================================================================
 module "vpc" {
-  source                                    = "git::https://github.com/opz0/terraform-gcp-vpc.git?ref=v1.0.0"
+  source                                    = "git::https://github.com/cypik/terraform-gcp-vpc.git?ref=v1.0.0"
   name                                      = "app"
   environment                               = "test"
   network_firewall_policy_enforcement_order = "AFTER_CLASSIC_FIREWALL"
@@ -18,7 +18,7 @@ module "vpc" {
 #### subnet module call.
 ####==============================================================================
 module "subnet" {
-  source        = "git::https://github.com/opz0/terraform-gcp-subnet.git?ref=v1.0.0"
+  source        = "git::https://github.com/cypik/terraform-gcp-subnet.git?ref=v1.0.0"
   name          = "app"
   environment   = "test"
   gcp_region    = "us-west1"
@@ -30,7 +30,7 @@ module "subnet" {
 #### firewall module call.
 ####==============================================================================
 module "firewall" {
-  source        = "git::https://github.com/opz0/terraform-gcp-firewall.git?ref=v1.0.0"
+  source        = "git::https://github.com/cypik/terraform-gcp-firewall.git?ref=v1.0.0"
   name          = "app"
   environment   = "test"
   network       = module.vpc.self_link
