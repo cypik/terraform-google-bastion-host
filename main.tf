@@ -49,7 +49,8 @@ module "instance_template" {
   metadata = {
     ssh-keys = var.ssh-keys
   }
-  access_config = var.access_config
+  ## public IP if enable_public_ip is true
+  enable_public_ip = true
 }
 
 #####==============================================================================

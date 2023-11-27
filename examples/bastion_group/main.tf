@@ -19,11 +19,10 @@ module "vpc" {
 ####==============================================================================
 module "subnet" {
   source        = "git::https://github.com/cypik/terraform-gcp-subnet.git?ref=v1.0.0"
-  name          = "app"
-  environment   = "test"
+  subnet_names  = ["subnet-a"]
   gcp_region    = "us-west1"
   network       = module.vpc.vpc_id
-  ip_cidr_range = "10.10.0.0/16"
+  ip_cidr_range = ["10.10.1.0/24"]
 }
 
 ####==============================================================================

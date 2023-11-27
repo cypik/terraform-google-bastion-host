@@ -24,7 +24,7 @@ variable "managedby" {
 
 variable "repository" {
   type        = string
-  default     = ""
+  default     = "https://github.com/cypik/terraform-gcp-bastion-host"
   description = "Terraform current module repo"
 }
 
@@ -122,19 +122,19 @@ variable "additional_ports" {
   default     = []
 }
 
-variable "access_config" {
-  description = "Access configurations, i.e. IPs via which the VM instance can be accessed via the Internet."
-  type = list(object({
-    nat_ip       = string
-    network_tier = string
-  }))
-  default = [
-    {
-      network_tier = ""
-      nat_ip       = ""
-    }
-  ]
-}
+#variable "access_config" {
+#  description = "Access configurations, i.e. IPs via which the VM instance can be accessed via the Internet."
+#  type = list(object({
+#    nat_ip       = string
+#    network_tier = string
+#  }))
+#  default = [
+#    {
+#      network_tier = ""
+#      nat_ip       = ""
+#    }
+#  ]
+#}
 
 variable "create_firewall_rule" {
   type        = bool
