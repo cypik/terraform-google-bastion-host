@@ -30,7 +30,6 @@ module "instance_template" {
   image_project                      = var.image_project
   subnet                             = var.subnet
   network                            = var.network
-  access_config                      = var.enable_public_ip ? var.access_config : []
   labels                             = var.labels
   members                            = var.members
   service_account_name               = var.service_account_name

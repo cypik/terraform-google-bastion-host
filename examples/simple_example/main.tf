@@ -1,5 +1,5 @@
 provider "google" {
-  project = "opz0-397319"
+  project = "local-concord-408802"
   region  = "us-west1"
   zone    = "us-west1-a"
 }
@@ -32,7 +32,7 @@ module "firewall" {
   source        = "git::https://github.com/cypik/terraform-gcp-firewall.git?ref=v1.0.0"
   name          = "app"
   environment   = "test"
-  network       = module.vpc.self_link
+  network       = module.vpc.vpc_id
   source_ranges = ["0.0.0.0/0"]
 
   allow = [

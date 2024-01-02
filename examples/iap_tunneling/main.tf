@@ -1,5 +1,5 @@
 provider "google" {
-  project = "opz0-397319"
+  project = "local-concord-408802"
   region  = "us-west1"
   zone    = "us-west1-a"
 }
@@ -9,7 +9,7 @@ provider "google" {
 ####==============================================================================
 module "vpc" {
   source                                    = "git::https://github.com/cypik/terraform-gcp-vpc.git?ref=v1.0.0"
-  name                                      = "app"
+  name                                      = "app11"
   environment                               = "test"
   network_firewall_policy_enforcement_order = "AFTER_CLASSIC_FIREWALL"
 }
@@ -30,7 +30,7 @@ module "subnet" {
 ####==============================================================================
 module "firewall" {
   source        = "git::https://github.com/cypik/terraform-gcp-firewall.git?ref=v1.0.0"
-  name          = "app"
+  name          = "app11"
   environment   = "test"
   network       = module.vpc.self_link
   source_ranges = ["0.0.0.0/0"]
@@ -47,7 +47,7 @@ module "firewall" {
 #####==============================================================================
 module "service-account" {
   source           = "git::https://github.com/cypik/terraform-gcp-Service-account.git?ref=v1.0.0"
-  name             = "app"
+  name             = "app11"
   environment      = "test"
   key_algorithm    = "KEY_ALG_RSA_2048"
   public_key_type  = "TYPE_X509_PEM_FILE"
@@ -78,7 +78,7 @@ module "instance_template" {
 
 resource "google_compute_instance_from_template" "vm" {
   name                     = "example-instance"
-  project                  = "opz0-397319"
+  project                  = "local-concord-408802"
   zone                     = "us-west1-a"
   source_instance_template = module.instance_template.self_link_unique
   network_interface {
@@ -94,7 +94,7 @@ resource "google_service_account_iam_binding" "sa_user" {
 
 resource "google_project_iam_member" "os_login_bindings" {
   for_each = toset([])
-  project  = "opz0-397319"
+  project  = "local-concord-408802"
   role     = "roles/compute.osLogin"
   member   = each.key
 }

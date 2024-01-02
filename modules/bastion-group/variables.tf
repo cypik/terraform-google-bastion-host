@@ -161,21 +161,21 @@ variable "min_replicas" {
   description = "The minimum number of replicas that the autoscaler can scale down to. This cannot be less than 0."
 }
 
-variable "access_config" {
-  description = "Access configs for network, nat_ip and DNS"
-  type = list(object({
-    network_tier = string
-    nat_ip       = string
-  }))
-  default = [
-    {
-      network_tier = ""
-      nat_ip       = ""
-    }
-  ]
-}
-
-variable "enable_public_ip" {
-  type    = bool
-  default = true
-}
+#variable "access_config" {
+#  description = "Access configs for network, nat_ip and DNS"
+#  type = list(object({
+#    network_tier = string
+#    nat_ip       = string
+#  }))
+#  default = [
+#    {
+#      network_tier = ""
+#      nat_ip       = ""
+#    }
+#  ]
+#}
+#
+#variable "enable_public_ip" {
+#  type    = bool
+#  default = true
+#}
