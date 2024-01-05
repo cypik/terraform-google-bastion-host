@@ -39,21 +39,5 @@ module "instance_template" {
   zone                               = var.zone
   random_role_id                     = var.random_role_id
   create_instance_from_template      = false
-}
 
-#####==============================================================================
-##### firewall module call.
-#####==============================================================================
-module "firewall" {
-  source        = "git::https://github.com/cypik/terraform-gcp-firewall.git?ref=v1.0.0"
-  name          = "app"
-  environment   = "test"
-  network       = var.network
-  source_ranges = ["0.0.0.0/0"]
-
-  allow = [
-    { protocol = "tcp"
-      ports    = ["22", "80"]
-    }
-  ]
 }

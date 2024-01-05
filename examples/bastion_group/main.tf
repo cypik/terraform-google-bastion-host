@@ -30,7 +30,7 @@ module "subnet" {
 ####==============================================================================
 module "firewall" {
   source        = "git::https://github.com/cypik/terraform-gcp-firewall.git?ref=v1.0.0"
-  name          = "app"
+  name          = "app1"
   environment   = "test"
   network       = module.vpc.self_link
   source_ranges = ["0.0.0.0/0"]
@@ -55,11 +55,4 @@ module "iap_bastion_group" {
   subnet      = module.subnet.subnet_self_link
   members     = []
   target_size = 1
-
-  ######### public_ip
-  enable_public_ip = true
-  access_config = [{
-    nat_ip       = ""
-    network_tier = "PREMIUM"
-  }, ]
 }

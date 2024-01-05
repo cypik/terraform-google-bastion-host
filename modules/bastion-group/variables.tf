@@ -152,30 +152,11 @@ variable "region" {
 variable "autoscaling_enabled" {
   type        = bool
   default     = false
-  description = "Creates an autoscaler for the managed instance group"
+  description = "Creates an autoscaling for the managed instance group"
 }
 
 variable "min_replicas" {
   type        = number
   default     = 1
-  description = "The minimum number of replicas that the autoscaler can scale down to. This cannot be less than 0."
+  description = "The minimum number of replicas that the autoscaling can scale down to. This cannot be less than 0."
 }
-
-#variable "access_config" {
-#  description = "Access configs for network, nat_ip and DNS"
-#  type = list(object({
-#    network_tier = string
-#    nat_ip       = string
-#  }))
-#  default = [
-#    {
-#      network_tier = ""
-#      nat_ip       = ""
-#    }
-#  ]
-#}
-#
-#variable "enable_public_ip" {
-#  type    = bool
-#  default = true
-#}

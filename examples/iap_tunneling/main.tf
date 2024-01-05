@@ -60,24 +60,27 @@ module "service-account" {
 #####==============================================================================
 module "instance_template" {
   source               = "git::https://github.com/cypik/terraform-gcp-template-instance.git?ref=v1.0.0"
-  instance_template    = true
   name                 = "template"
   environment          = "test"
-  region               = "us-west1"
+  region               = "asia-northeast1"
   source_image         = "ubuntu-2204-jammy-v20230908"
   source_image_family  = "ubuntu-2204-lts"
   source_image_project = "ubuntu-os-cloud"
+  disk_size_gb         = "20"
   subnetwork           = module.subnet.subnet_id
+  instance_template    = true
   service_account      = null
+  ## public IP if enable_public_ip is true
+  enable_public_ip = true
   metadata = {
     ssh-keys = <<EOF
-      dev:ssh-rsa +j/FmgC27u/+/0YqTB2cIkD1+mwt2y+PDQMU= suresh@suresh
+      dev:ssh-rsa AAAAB3NzaC1yc2EAA/3mwt2y+PDQMU= suresh@suresh
     EOF
   }
 }
 
 resource "google_compute_instance_from_template" "vm" {
-  name                     = "example-instance"
+  name                     = "${var.name}-${var.environment}"
   project                  = "local-concord-408802"
   zone                     = "us-west1-a"
   source_instance_template = module.instance_template.self_link_unique
@@ -104,8 +107,8 @@ resource "google_project_iam_member" "os_login_bindings" {
 #####==============================================================================
 module "iap_tunneling" {
   source           = "../../modules/iap-tunneling"
-  name             = "test"
-  environment      = "iap-tunneling"
+  name             = var.name
+  environment      = var.environment
   network          = module.vpc.self_link
   members          = []
   service_accounts = [module.service-account.account_email]

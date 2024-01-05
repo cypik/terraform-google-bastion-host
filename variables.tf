@@ -40,6 +40,12 @@ variable "image_project" {
   default     = "ubuntu-os-cloud"
 }
 
+variable "disk_size_gb" {
+  type        = string
+  default     = "20"
+  description = "Project where the  disk_size_gb for the Bastion comes from"
+}
+
 variable "create_instance_from_template" {
   type        = bool
   description = "Whether to create and instance from the template or not. If false, no instance is created, but the instance template is created and usable by a MIG"
@@ -121,20 +127,6 @@ variable "additional_ports" {
   type        = list(string)
   default     = []
 }
-
-#variable "access_config" {
-#  description = "Access configurations, i.e. IPs via which the VM instance can be accessed via the Internet."
-#  type = list(object({
-#    nat_ip       = string
-#    network_tier = string
-#  }))
-#  default = [
-#    {
-#      network_tier = ""
-#      nat_ip       = ""
-#    }
-#  ]
-#}
 
 variable "create_firewall_rule" {
   type        = bool

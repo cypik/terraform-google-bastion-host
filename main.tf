@@ -44,6 +44,7 @@ module "instance_template" {
   region               = var.region
   source_image_family  = var.image_family
   source_image_project = var.image_project
+  disk_size_gb         = var.disk_size_gb
   subnetwork           = var.subnet
   service_account      = null
   metadata = {

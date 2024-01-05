@@ -9,11 +9,11 @@
 - [License](#license)
 
 ## Introduction
-This project deploys a Google Cloud infrastructure using Terraform to create **BASTION** .
+This project deploys a Google Cloud infrastructure using Terraform to create Bastion.
 ## Usage
 To use this module, you should have Terraform installed and configured for GCP. This module provides the necessary Terraform configuration for creating GCP resources, and you can customize the inputs as needed. Below is an example of how to use this module:
 
-# Example: _bastion_
+# Example: _Bastion-Host_
 
 ```hcl
 module "iap_bastion" {
@@ -41,15 +41,15 @@ This example demonstrates how to create various GCP resources using the provided
 ## Module Outputs
 Each module may have specific outputs. You can retrieve these outputs by referencing the module in your Terraform configuration.
 
-- `hostname` : hostname of the iap bastion instsnce iam binding.
+- `hostname` : hostname of the iap bastion instance iam binding.
 - `ip_address` : IP address for which this forwarding rule accepts traffic.
 - `self_link` : Self link of the bastion host
 - `service_account` : The email for the service account created for the bastion host.
-- `members` : members of the iap tunnel instsnce iam binding.
+- `members` : members of the iap tunnel instance iam binding.
 - `instance_template` :  Self link of the bastion instance template for use with a MIG.
 
 ## Examples
-For detailed examples on how to use this module, please refer to the [EXAMPLE](https://github.com/cypik/terraform-gcp-bastion-host/tree/master/examples) directory within this repository.
+For detailed examples on how to use this module, please refer to the [Examples](https://github.com/cypik/terraform-gcp-bastion-host/tree/master/examples) directory within this repository.
 
 ## Author
 Your Name Replace **'[License Name]'** and **'[Your Name]'** with the appropriate license and your information. Feel free to expand this README with additional details or usage instructions as needed for your specific use case.
