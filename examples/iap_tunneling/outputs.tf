@@ -4,17 +4,17 @@ output "service_account" {
 }
 
 output "members" {
-  description = "members of the iap tunnel instsnce iam binding"
+  description = "members of the iap tunnel instance iam binding"
   value       = module.iap_tunneling.members
 }
 
 output "id" {
-  description = "id of the iap tunnel instsnce iam binding"
+  description = "id of the iap tunnel instance iam binding"
   value       = module.iap_tunneling.id
 }
 
 output "etag" {
-  description = "etag of the iap tunnel instsnce iam binding"
+  description = "etag of the iap tunnel instance iam binding"
   value       = module.iap_tunneling.etag
 }
 

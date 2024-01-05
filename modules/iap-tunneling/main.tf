@@ -9,6 +9,7 @@ module "labels" {
 
 data "google_client_config" "current" {
 }
+
 #tfsec:ignore:google-compute-no-public-ingress
 resource "google_compute_firewall" "allow_from_iap_to_instances" {
   count   = var.create_firewall_rule ? 1 : 0
