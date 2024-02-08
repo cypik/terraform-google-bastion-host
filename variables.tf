@@ -18,13 +18,13 @@ variable "label_order" {
 
 variable "managedby" {
   type        = string
-  default     = ""
+  default     = "cypik"
   description = "ManagedBy, eg 'cypik'."
 }
 
 variable "repository" {
   type        = string
-  default     = "https://github.com/cypik/terraform-gcp-bastion-host"
+  default     = "https://github.com/cypik/terraform-google-bastion-host"
   description = "Terraform current module repo"
 }
 
@@ -135,6 +135,7 @@ variable "create_firewall_rule" {
 }
 
 variable "ssh-keys" {
-  type    = string
-  default = ""
+  type        = string
+  default     = ""
+  description = "SSH public keys to be associated with the instances. Multiple keys can be provided, separated by commas."
 }

@@ -1,5 +1,6 @@
 module "labels" {
-  source      = "git::https://github.com/cypik/terraform-gcp-labels.git?ref=v1.0.0"
+  source      = "cypik/labels/google"
+  version     = "1.0.1"
   name        = var.name
   environment = var.environment
   label_order = var.label_order
@@ -9,7 +10,8 @@ module "labels" {
 
 
 module "mig" {
-  source              = "git::https://github.com/cypik/terraform-gcp-instance-group.git?ref=v1.0.0"
+  source              = "cypik/instance-group/google"
+  version             = "1.0.1"
   region              = var.region
   target_size         = var.target_size
   hostname            = format("%s", module.labels.id)

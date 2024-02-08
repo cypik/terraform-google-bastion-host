@@ -1,5 +1,6 @@
 module "labels" {
-  source      = "git::https://github.com/cypik/terraform-gcp-labels.git?ref=v1.0.0"
+  source      = "cypik/labels/google"
+  version     = "1.0.1"
   name        = var.name
   environment = var.environment
   label_order = var.label_order
@@ -38,7 +39,8 @@ resource "google_service_account" "bastion_host" {
 ###### instance_template module call.
 ######==============================================================================
 module "instance_template" {
-  source               = "git::https://github.com/cypik/terraform-gcp-template-instance.git?ref=v1.0.0"
+  source               = "cypik/template-instance/google"
+  version              = "1.0.1"
   instance_template    = true
   name                 = format("%s", module.labels.id)
   region               = var.region

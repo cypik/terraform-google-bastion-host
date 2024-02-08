@@ -4,32 +4,38 @@ provider "google" {
   zone    = "us-west1-a"
 }
 
-####==============================================================================
-#### vpc module call.
-####==============================================================================
+#####==============================================================================
+##### vpc module call.
+#####==============================================================================
 module "vpc" {
-  source                                    = "git::https://github.com/cypik/terraform-gcp-vpc.git?ref=v1.0.0"
+  source                                    = "cypik/vpc/google"
+  version                                   = "1.0.1"
   name                                      = "app"
   environment                               = "test"
+  routing_mode                              = "REGIONAL"
   network_firewall_policy_enforcement_order = "AFTER_CLASSIC_FIREWALL"
 }
 
-####==============================================================================
-#### subnet module call.
-####==============================================================================
+#####==============================================================================
+##### subnet module call.
+#####==============================================================================
 module "subnet" {
-  source        = "git::https://github.com/cypik/terraform-gcp-subnet.git?ref=v1.0.0"
+  source        = "cypik/subnet/google"
+  version       = "1.0.1"
+  name          = "app"
+  environment   = "test"
   subnet_names  = ["subnet-a"]
   gcp_region    = "us-west1"
   network       = module.vpc.vpc_id
   ip_cidr_range = ["10.10.1.0/24"]
 }
 
-####==============================================================================
-#### firewall module call.
-####==============================================================================
+#####==============================================================================
+##### firewall module call.
+#####==============================================================================
 module "firewall" {
-  source        = "git::https://github.com/cypik/terraform-gcp-firewall.git?ref=v1.0.0"
+  source        = "cypik/firewall/google"
+  version       = "1.0.1"
   name          = "app"
   environment   = "test"
   network       = module.vpc.vpc_id
