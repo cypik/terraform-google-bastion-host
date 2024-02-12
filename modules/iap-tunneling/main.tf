@@ -1,5 +1,6 @@
 module "labels" {
-  source      = "git::https://github.com/cypik/terraform-gcp-labels.git?ref=v1.0.0"
+  source      = "cypik/labels/google"
+  version     = "1.0.1"
   name        = var.name
   environment = var.environment
   label_order = var.label_order
@@ -9,6 +10,7 @@ module "labels" {
 
 data "google_client_config" "current" {
 }
+
 #tfsec:ignore:google-compute-no-public-ingress
 resource "google_compute_firewall" "allow_from_iap_to_instances" {
   count   = var.create_firewall_rule ? 1 : 0

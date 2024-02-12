@@ -1,5 +1,5 @@
 output "members" {
-  description = "members of the iap tunnel instsnce iam binding"
+  description = "members of the iap tunnel instance iam binding"
   value = {
     for key, instance in google_iap_tunnel_instance_iam_binding.enable_iap :
     key => instance.members
@@ -7,7 +7,7 @@ output "members" {
 }
 
 output "id" {
-  description = "id of the iap tunnel instsnce iam binding"
+  description = "id of the iap tunnel instance iam binding"
   value = {
     for key, instance in google_iap_tunnel_instance_iam_binding.enable_iap :
     key => instance.id
@@ -15,7 +15,7 @@ output "id" {
 }
 
 output "etag" {
-  description = "etag of the iap tunnel instsnce iam binding"
+  description = "etag of the iap tunnel instance iam binding"
   value = {
     for key, instance in google_iap_tunnel_instance_iam_binding.enable_iap :
     key => instance.etag
